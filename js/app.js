@@ -22,7 +22,7 @@ var Enemy = function(x,y,speed) {
 Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
     if (this.x >= 505) {
-        this.x = 0;
+        this.x = -101;
     };
     this.checkCollision();
 };
@@ -128,7 +128,7 @@ var player = new Player();
 *   Player.handleInput() method. 
 * @param {keyCode} keyup - the key that is released up
 **/
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
