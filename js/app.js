@@ -42,9 +42,11 @@ Enemy.prototype.render = function() {
 Enemy.prototype.checkCollision = function() {
     if (this.x < player.x + 50 &&
         this.x + 50 > player.x &&
-        this.y < player.y + 80 &&
-        this.y + 80 > player.y) {
+        this.y < player.y + 70 &&
+        this.y + 70 > player.y) {
         alert("Oh no, collision!");
+        console.log(this.x, this.y);
+        console.log(player.x, player.y);
         document.location.reload();
     };
 }; 
