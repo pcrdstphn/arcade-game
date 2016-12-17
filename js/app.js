@@ -1,9 +1,11 @@
-/** Enemy class constructor
-    Creates a new bug starting to the left of the game board
-    with random y placement centering within the block rows
-    and with a random speed
+/** 
+* @description Represent an enemy bug starting to the left 
+*   off the canvas in a random stone row with a random speed 
+* @constructor
+* @param {number} x - the horizontal position on the canvas
+* @param {number} y - the vertical position on the canvas
+* @param {number} speed - the left to right step size per dt
 **/
-
 var Enemy = function(x,y,speed) {
     this.x = -101;
     this.y = Math.floor((Math.random() * 3) + 1) * 70;
@@ -11,25 +13,32 @@ var Enemy = function(x,y,speed) {
     this.sprite = 'images/enemy-bug.png';
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+/**
+* @description Update the enemy bug's horizontal position, 
+*   reset it to the left when it gets off canvas to the right, 
+*   then check for collision with the player
+* @param {number} dt - a time delta between ticks
+**/
 Enemy.prototype.update = function(dt) {
-    this.x += this.speed*dt;
+    this.x += this.speed * dt;
     if (this.x >= 505) {
         this.x = 0;
     };
     this.checkCollision();
 };
 
-// Draw the enemy on the screen, required method for game
+/** 
+* @description Draw the enemy bug on the screen
+**/
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-
-//using the axis-aligned bounding box algorithm modified
-//with the actual start locations and width/heights for
-//the bug(enemy) and cat(player) within their image files
+/**
+* @description Check for overlap of enemy bug and player sprites 
+*   using axis-aligned bounding box algorithm, alert and reset
+*   game if collision detected
+**/
 Enemy.prototype.checkCollision = function() {
     if (this.x < player.x + 50 &&
         this.x + 50 > player.x &&
@@ -40,36 +49,50 @@ Enemy.prototype.checkCollision = function() {
     };
 }; 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+/** 
+* @description Represent a player starting on the
+*   bottom grass row in the center of the canvas
+* @constructor
+**/
 var Player = function () {
     this.sprite = 'images/char-cat-girl.png';
     this.x = 202;
     this.y = 415;
  };
 
+/**
+* @description Check for player location, keep
+*   player on canvas and alert if into the water row
+**/
 Player.prototype.update = function() {
-    if (this.y<2) {
+    if (this.y < 2 ) {
         alert("You Won!");
         document.location.reload();
     }
-    if (this.y>415) {
-        this.y=415;
+    if (this.y > 415) {
+        this.y = 415;
     }
-    if (this.x>400) {
+    if (this.x > 400) {
         this.x = 400;
     }
-    if (this.x<1) {
-        this.x=1;
+    if (this.x < 1) {
+        this.x = 1;
     }
 };
 
+
+/** 
+* @description Draw the player on the screen
+**/
 Player.prototype.render = function () {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y); 
 };
 
-
+/**
+* @description Move the player around the canvas based
+*  on keyboard intry
+* @param {string} direction - keyboard arrow entry
+**/
 Player.prototype.handleInput = function (direction) {
     if (direction === 'left') {
         this.x -= 20;
@@ -85,17 +108,26 @@ Player.prototype.handleInput = function (direction) {
     }
 };
 
+/**
+* @description Instantiate 3 enemy bugs into an array
+**/
 var allEnemies = [];
 
-for (var i = 0; i<3; i++) {
+for (var i = 0; i < 3; i++) {
     allEnemies[i] = new Enemy();
 }
 
+/**
+*@description Instantiate a player
+**/
 var player = new Player();
 
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+/**
+* @description Listen for key presses and send the keys to 
+*   Player.handleInput() method. 
+* @param {keyCode} keyup - the key that is released up
+**/
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
