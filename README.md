@@ -1,6 +1,15 @@
-frontend-nanodegree-arcade-game
+#Arcade-Game#
 ===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+###Description##
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+This arcade-game is modeled on the old "frogger game" and is a project in Udacity's Front End Web Developer Nanodegree Program.  The idea is to get the player to the top of the playing field without colliding with bugs.
+
+###How to Run###
+Fork or clone this repository to your computer and double click the index.html file to start the game.
+
+###How to Play###
+Use the arrow keys to move the player around the game area.  Avoid bugs and get the player up into the water to win the game.  Winning the game or hitting a bug will cause the game to start over.
+
+###Known Bugs###
+Using the axis aligned bounding box algorithm, adjusting for the actual player and bug locations within their image files, allowed too much visual space at collision detection.  I used a trial and arrow method to get better real time images in collisions but it's still not perfect.
